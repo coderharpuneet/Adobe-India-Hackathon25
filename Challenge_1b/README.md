@@ -1,93 +1,37 @@
-# Challenge 1b: Multi-Collection PDF Analysis
+# Challenge 1B: Persona-Driven Document Intelligence
 
-## Overview
-Advanced PDF analysis solution that processes multiple document collections and extracts relevant content based on specific personas and use cases.
+## Quick Start
 
-## Project Structure
-```
-Challenge_1b/
-├── Collection 1/                    # Travel Planning
-│   ├── PDFs/                       # South of France guides
-│   ├── challenge1b_input.json      # Input configuration
-│   └── challenge1b_output.json     # Analysis results
-├── Collection 2/                    # Adobe Acrobat Learning
-│   ├── PDFs/                       # Acrobat tutorials
-│   ├── challenge1b_input.json      # Input configuration
-│   └── challenge1b_output.json     # Analysis results
-├── Collection 3/                    # Recipe Collection
-│   ├── PDFs/                       # Cooking guides
-│   ├── challenge1b_input.json      # Input configuration
-│   └── challenge1b_output.json     # Analysis results
-└── README.md
+### Docker (Recommended)
+```bash
+docker build -t persona-doc-analyzer .
+docker run -v "$(pwd):/app" persona-doc-analyzer
 ```
 
-## Collections
-
-### Collection 1: Travel Planning
-- **Challenge ID**: round_1b_002
-- **Persona**: Travel Planner
-- **Task**: Plan a 4-day trip for 10 college friends to South of France
-- **Documents**: 7 travel guides
-
-### Collection 2: Adobe Acrobat Learning
-- **Challenge ID**: round_1b_003
-- **Persona**: HR Professional
-- **Task**: Create and manage fillable forms for onboarding and compliance
-- **Documents**: 15 Acrobat guides
-
-### Collection 3: Recipe Collection
-- **Challenge ID**: round_1b_001
-- **Persona**: Food Contractor
-- **Task**: Prepare vegetarian buffet-style dinner menu for corporate gathering
-- **Documents**: 9 cooking guides
-
-## Input/Output Format
-
-### Input JSON Structure
-```json
-{
-  "challenge_info": {
-    "challenge_id": "round_1b_XXX",
-    "test_case_name": "specific_test_case"
-  },
-  "documents": [{"filename": "doc.pdf", "title": "Title"}],
-  "persona": {"role": "User Persona"},
-  "job_to_be_done": {"task": "Use case description"}
-}
+### Direct Python
+```bash
+pip install -r requirements.txt
+python run_challenge1b.py
 ```
 
-### Output JSON Structure
-```json
-{
-  "metadata": {
-    "input_documents": ["list"],
-    "persona": "User Persona",
-    "job_to_be_done": "Task description"
-  },
-  "extracted_sections": [
-    {
-      "document": "source.pdf",
-      "section_title": "Title",
-      "importance_rank": 1,
-      "page_number": 1
-    }
-  ],
-  "subsection_analysis": [
-    {
-      "document": "source.pdf",
-      "refined_text": "Content",
-      "page_number": 1
-    }
-  ]
-}
+### Individual Collection
+```bash
+python persona_document_analyzer.py \
+    --input "Collection 1/challenge1b_input.json" \
+    --pdf_dir "Collection 1/PDFs" \
+    --output "Collection 1/results.json"
 ```
 
-## Key Features
-- Persona-based content analysis
-- Importance ranking of extracted sections
-- Multi-collection document processing
-- Structured JSON output with metadata
+## Files
 
----
+- `persona_document_analyzer.py` - Main analysis engine
+- `run_challenge1b.py` - Production runner for all collections
+- `requirements.txt` - Python dependencies
+- `Dockerfile` - Container configuration
+- `approach_explanation.md` - Methodology (300-500 words)
+- `SOLUTION_OVERVIEW.md` - Complete documentation
+- `Collection 1/2/3/` - Test datasets
 
-**Note**: This README provides a brief overview of the Challenge 1b solution structure based on available sample data. 
+## Requirements Met
+
+✅ CPU Only | ✅ <1GB Model | ✅ <60s Processing | ✅ No Internet | ✅ Generic Solution
